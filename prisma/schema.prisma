@@ -1,0 +1,16 @@
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Tenant {
+  id             String    @id @default(cuid())
+  subdomainPath  String    @unique   // e.g. "filippo.lucchesi.io"
+  label          String              // human-readable name, e.g. "Filippo"
+  keyHash        String              // bcrypt/argon2 hash of the API key
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}

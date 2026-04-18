@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: fief_app
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - fief_internal
+      - caddy_gateway
+      - db_network
+
+networks:
+  fief_internal:
+  caddy_gateway:
+    external: true
+  db_network:
+    external: true

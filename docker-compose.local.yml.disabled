@@ -1,0 +1,12 @@
+services:
+  app:
+    networks:
+      - fief_internal
+      - caddy_gateway
+      - db_network
+
+networks:
+  caddy_gateway:
+    external: false
+  db_network:
+    external: false
