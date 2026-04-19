@@ -441,6 +441,7 @@ Fief runs under Portcullis. Before deploying for the first time:
 ### What exists
 
 - [x] Project scaffolding
+- [x] Initial Prisma migration
 - [x] `docker-compose.yml` (app only — no Caddy, no Postgres)
 - [x] Dockerfile + entrypoint
 - [x] `lib/dns/provider.ts` (DnsProvider interface)
@@ -472,10 +473,11 @@ Fief runs under Portcullis. Before deploying for the first time:
 - **Header Redundancy**: Redundant headers were removed from individual pages as they are now handled globally in the root `layout.tsx` for consistency.
 - **Dark Mode Enforcement**: The application is explicitly set to `dark` mode in the `<html>` tag to ensure the new premium aesthetics are consistent across all components.
 - **Prisma Generate in Docker**: `npm install` may not automatically trigger `npx prisma generate` in the Docker build environment. Explicitly running it before `npm run build` is required to ensure TypeScript finds the generated models (e.g., `Tenant`).
+- **Missing Migrations**: Ensure that at least one initial migration exists in `prisma/migrations/`. Without it, `prisma migrate deploy` in the entrypoint will not create any tables, leading to `TableDoesNotExist` errors.
 
 ### Last session summary
 
-Resolved a critical build failure on the VPS by updating the `Dockerfile` to explicitly run `npx prisma generate` during the build process. This ensures the Prisma client is correctly populated with the `Tenant` model before the TypeScript compiler runs.
+Resolved a `TableDoesNotExist` error on the VPS by generating and committing the initial Prisma migration files. This ensures that the `entrypoint.sh` can successfully apply the database schema on startup using `prisma migrate deploy`.
 
 ---
 
