@@ -1,1 +1,63 @@
-{}
+{
+  "Login": {
+    "title": "Welcome to Fief",
+    "description": "Enter your API key to manage your DNS records",
+    "apiKey": "API Key",
+    "submit": "Sign In",
+    "error": "Invalid API key"
+  },
+  "Dashboard": {
+    "title": "Your Records",
+    "description": "Manage DNS records for {path}",
+    "addRecord": "Add Record",
+    "type": "Type",
+    "host": "Host",
+    "value": "Value",
+    "ttl": "TTL",
+    "actions": "Actions",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "empty": "No records found"
+  },
+  "Admin": {
+    "title": "Admin Dashboard",
+    "description": "Manage tenants and global settings",
+    "tenants": "Tenants",
+    "addTenant": "New Tenant",
+    "label": "Label",
+    "subdomainPath": "Subdomain Path",
+    "createdAt": "Created At",
+    "records": "Records",
+    "rotateKey": "Rotate Key",
+    "deleteTenant": "Delete",
+    "newKeyTitle": "New API Key",
+    "newKeyDescription": "Copy this key now. It will not be shown again.",
+    "close": "Close"
+  },
+  "Common": {
+    "docs": "API Docs",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "logout": "Logout",
+    "language": "Language",
+    "english": "English",
+    "italian": "Italian"
+  },
+  "Docs": {
+    "title": "API Documentation",
+    "description": "Learn how to manage your DNS records programmatically using the Fief REST API.",
+    "authTitle": "Authentication",
+    "authDescription": "All API requests require an API key passed in the `Authorization` header as a Bearer token.",
+    "endpointsTitle": "Endpoints",
+    "listRecords": "List Records",
+    "listRecordsDesc": "Retrieve all DNS records associated with your subdomain path.",
+    "setRecord": "Set Record",
+    "setRecordDesc": "Create or update a DNS record. Note that NameCheap's API is replacement-based; Fief handles the fetch-patch-push cycle for you.",
+    "deleteRecord": "Delete Record",
+    "deleteRecordDesc": "Remove a specific DNS record by host and type.",
+    "examplesTitle": "Examples",
+    "copy": "Copy",
+    "copied": "Copied!"
+  }
+}

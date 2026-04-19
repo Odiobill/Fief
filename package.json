@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@prisma/client": "^7.7.0",
+    "bcrypt": "^6.0.0",
+    "fast-xml-parser": "^5.7.1",
     "iron-session": "^8.0.4",
     "next": "16.2.4",
     "next-intl": "^4.9.1",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@prisma/adapter-pg": "^7.7.0",
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/pg": "^8.20.0",
     "@types/react": "^19",

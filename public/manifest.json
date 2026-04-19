@@ -4,8 +4,8 @@
   "description": "DNS Delegation Manager",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
   "icons": [
     {
       "src": "/icon-192x192.png",

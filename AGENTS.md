@@ -449,25 +449,31 @@ Fief runs under Portcullis. Before deploying for the first time:
 - [x] `lib/auth.ts` (key verification, session helpers)
 - [x] `lib/db.ts` (Prisma client with pg adapter)
 - [x] Prisma schema (Tenant model)
-- [ ] REST API — tenant endpoints
-- [ ] REST API — admin endpoints
-- [ ] Web UI — login page
-- [ ] Web UI — tenant dashboard
-- [ ] Web UI — admin dashboard
-- [x] i18n setup (next-intl, en + it)
+- [x] REST API — tenant endpoints
+- [x] REST API — admin endpoints
+- [x] Web UI — login page (Redesigned with custom branding)
+- [x] Web UI — tenant dashboard (Refined dark theme)
+- [x] Web UI — admin dashboard (Refined dark theme)
+- [x] API Documentation page (New interactive specs)
+- [x] Language Switcher (New persistent component)
+- [x] i18n setup (next-intl, en + it fully synced)
 - [x] PWA manifest + service worker
+- [x] Custom branding assets (Logo, Favicon, PWA icons)
 - [x] `.env.example`
 - [x] ADR stubs in `docs/decisions/`
 
 ### Known gotchas
 
-- **Prisma 7 Configuration**: Connection URLs MUST move from `schema.prisma` to `prisma.config.ts`. The `url` property in `datasource` is no longer supported in the schema file.
-- **Next.js 16.2 Standing**: The `output: 'standalone'` property in `next.config.ts` must be explicitly typed if using TypeScript strict mode.
-- **Prisma Generate**: Always run `npx prisma generate` after schema changes to ensure the `@prisma/client` types are up to date, especially for `Tenant` model exports.
+- **Prisma 7 Configuration**: Connection URLs MUST move from `schema.prisma` to `prisma.config.js` (or `.ts`). The `url` property in `datasource` is no longer supported in the schema file. When using `prisma migrate deploy`, the `datasource.url` must be explicitly present in the config file.
+- **Next.js 15/16 Async Params**: `params` and `searchParams` in Pages, Layouts, and API route handlers are now Promises and MUST be awaited. Typing them as plain objects will cause build failures.
+- **Next.js Root Layout**: A root layout with `<html>` and `<body>` tags is mandatory. In localized apps, ensure `app/[locale]/layout.tsx` satisfies this requirement and that no `page.tsx` exists outside the localized group without a corresponding layout.
+- **Prisma Migrate Shadow DB**: `prisma migrate dev` requires `CREATEDB` permissions to create a shadow database. On shared Postgres instances (like Portcullis), use `npx prisma db push` as a workaround to sync the schema.
+- **Header Redundancy**: Redundant headers were removed from individual pages as they are now handled globally in the root `layout.tsx` for consistency.
+- **Dark Mode Enforcement**: The application is explicitly set to `dark` mode in the `<html>` tag to ensure the new premium aesthetics are consistent across all components.
 
 ### Last session summary
 
-Completed the initial project scaffolding for Fief. Set up Next.js 16.2 with Rspack, Tailwind, next-intl, and next-pwa. Implemented the Docker architecture (Dockerfile, docker-compose), Prisma 7 schema with Tenant model, and core library stubs for DNS providers and authentication. Verified the TypeScript baseline is clean.
+Implemented a comprehensive branding overhaul, replacing legacy assets with a custom-generated minimalistic logo and high-fidelity dark-themed UI. Added a dedicated API documentation page with interactive specs and code examples. Introduced a persistent language switcher in the global header and fully synchronized English and Italian localization keys. Updated the README with standalone deployment instructions, a link to [Portcullis](https://github.com/Odiobill/Portcullis), and a note on the extensible provider-agnostic architecture.
 
 ---
 

@@ -1,1 +1,63 @@
-{}
+{
+  "Login": {
+    "title": "Benvenuto in Fief",
+    "description": "Inserisci la tua chiave API per gestire i tuoi record DNS",
+    "apiKey": "Chiave API",
+    "submit": "Accedi",
+    "error": "Chiave API non valida"
+  },
+  "Dashboard": {
+    "title": "I Tuoi Record",
+    "description": "Gestisci i record DNS per {path}",
+    "addRecord": "Aggiungi Record",
+    "type": "Tipo",
+    "host": "Host",
+    "value": "Valore",
+    "ttl": "TTL",
+    "actions": "Azioni",
+    "delete": "Elimina",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "empty": "Nessun record trovato"
+  },
+  "Admin": {
+    "title": "Pannello Admin",
+    "description": "Gestisci i tenant e le impostazioni globali",
+    "tenants": "Tenant",
+    "addTenant": "Nuovo Tenant",
+    "label": "Etichetta",
+    "subdomainPath": "Percorso Sottodominio",
+    "createdAt": "Creato il",
+    "records": "Record",
+    "rotateKey": "Ruota Chiave",
+    "deleteTenant": "Elimina",
+    "newKeyTitle": "Nuova Chiave API",
+    "newKeyDescription": "Copia questa chiave ora. Non verrà mostrata di nuovo.",
+    "close": "Chiudi"
+  },
+  "Common": {
+    "docs": "Documentazione API",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "logout": "Esci",
+    "language": "Lingua",
+    "english": "Inglese",
+    "italian": "Italiano"
+  },
+  "Docs": {
+    "title": "Documentazione API",
+    "description": "Scopri come gestire i tuoi record DNS a livello di programmazione usando l'API REST di Fief.",
+    "authTitle": "Autenticazione",
+    "authDescription": "Tutte le richieste API richiedono una chiave API passata nell'header `Authorization` come Bearer token.",
+    "endpointsTitle": "Endpoint",
+    "listRecords": "Elenca Record",
+    "listRecordsDesc": "Recupera tutti i record DNS associati al tuo percorso di sottodominio.",
+    "setRecord": "Imposta Record",
+    "setRecordDesc": "Crea o aggiorna un record DNS. Nota che l'API di NameCheap è basata sulla sostituzione; Fief gestisce il ciclo fetch-patch-push per te.",
+    "deleteRecord": "Elimina Record",
+    "deleteRecordDesc": "Rimuovi uno specifico record DNS per host e tipo.",
+    "examplesTitle": "Esempi",
+    "copy": "Copia",
+    "copied": "Copiato!"
+  }
+}
