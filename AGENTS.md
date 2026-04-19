@@ -414,7 +414,7 @@ Fief runs under Portcullis. Before deploying for the first time:
 3. Register Fief as a service in the Portcullis UI (`fief.yourdomain.com → fief_app:3000`).
 4. Sync and deploy:
    ```bash
-   rsync -avz --exclude node_modules --exclude .next \
+   rsync -avz --exclude-from='.rsyncignore' \
      ./ user@vps-host:/opt/fief/
    ssh user@vps-host "cd /opt/fief && docker compose up --build -d"
    ```
@@ -459,7 +459,8 @@ Fief runs under Portcullis. Before deploying for the first time:
 - [x] i18n setup (next-intl, en + it fully synced)
 - [x] PWA manifest + service worker
 - [x] Custom branding assets (Logo, Favicon, PWA icons)
-- [x] `.env.example`
+- [x] .env.example
+- [x] .rsyncignore for optimized deployment
 - [x] ADR stubs in `docs/decisions/`
 
 ### Known gotchas
@@ -470,10 +471,11 @@ Fief runs under Portcullis. Before deploying for the first time:
 - **Prisma Migrate Shadow DB**: `prisma migrate dev` requires `CREATEDB` permissions to create a shadow database. On shared Postgres instances (like Portcullis), use `npx prisma db push` as a workaround to sync the schema.
 - **Header Redundancy**: Redundant headers were removed from individual pages as they are now handled globally in the root `layout.tsx` for consistency.
 - **Dark Mode Enforcement**: The application is explicitly set to `dark` mode in the `<html>` tag to ensure the new premium aesthetics are consistent across all components.
+- **Prisma Generate in Docker**: `npm install` may not automatically trigger `npx prisma generate` in the Docker build environment. Explicitly running it before `npm run build` is required to ensure TypeScript finds the generated models (e.g., `Tenant`).
 
 ### Last session summary
 
-Implemented a comprehensive branding overhaul, replacing legacy assets with a custom-generated minimalistic logo and high-fidelity dark-themed UI. Added a dedicated API documentation page with interactive specs and code examples. Introduced a persistent language switcher in the global header and fully synchronized English and Italian localization keys. Updated the README with standalone deployment instructions, a link to [Portcullis](https://github.com/Odiobill/Portcullis), and a note on the extensible provider-agnostic architecture.
+Resolved a critical build failure on the VPS by updating the `Dockerfile` to explicitly run `npx prisma generate` during the build process. This ensures the Prisma client is correctly populated with the `Tenant` model before the TypeScript compiler runs.
 
 ---
 

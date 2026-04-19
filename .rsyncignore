@@ -1,0 +1,46 @@
+# Version Control
+.git/
+.gitignore
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Environment variables (Manage these directly on the VPS)
+.env
+.env*.local
+
+# Documentation and metadata (Not needed for the container build)
+AGENTS.md
+CLAUDE.md
+docs/
+
+# IDE / Editor files
+.vscode/
+.idea/
+.swp
+.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# Testing
+coverage/
+
+# Private assets
+private/
+

@@ -105,6 +105,18 @@ Copy `.env.example` to `.env` and configure the following:
 - `ADMIN_API_KEY`: Secret key for administrative access.
 - `SESSION_SECRET`: Long random string for cookie signing.
 
+## Deployment
+
+To deploy Fief to your VPS, you can use `rsync` to transfer the source files and build the Docker image on the destination. A `.rsyncignore` file is provided to ensure only necessary files are transferred.
+
+```bash
+# Sync files to the VPS
+rsync -avz --exclude-from='.rsyncignore' ./ user@vps-host:/opt/fief/
+
+# Build and start the container on the VPS
+ssh user@vps-host "cd /opt/fief && docker compose up --build -d"
+```
+
 ## License
 
 MIT

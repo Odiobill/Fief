@@ -9,7 +9,7 @@ WORKDIR /app
 # Install dependencies
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma/
-RUN npm install
+RUN npm install && npx prisma generate
 
 # Build the source code
 FROM base AS builder
@@ -19,7 +19,7 @@ COPY . .
 
 # Next.js 16.2 Rspack build
 ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
-RUN npm run build
+RUN npx prisma generate && npm run build
 
 # Production image
 FROM base AS runner
