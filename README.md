@@ -1,15 +1,15 @@
 # Fief
 
-Fief is a self-hosted DNS delegation manager. It allows you to grant scoped, revocable control over specific subdomains to other people without exposing your registrar credentials or root domain.
+Fief is a self-hosted DNS delegation manager. It allows you to grant scoped, revocable control over specific subdomains to others without exposing your registrar credentials or the root domain.
 
-![Fief Logo](/logo.png)
+![Fief Logo](/public/logo.png)
 
 ## Features
 
 - **Multi-tenant**: Each tenant has their own API key and subdomain path.
 - **Registrar Integration**: Support for NameCheap with safe fetch-patch-push logic to prevent record data loss.
 - **REST API**: Full CRUD support for DNS records (A, AAAA, CNAME, TXT).
-- **Interactive Documentation**: Built-in sleek API documentation for tenants.
+- **Interactive Documentation**: Built-in, sleek API documentation for tenants.
 - **Web UI**: Modern, responsive interface with separate dashboards for tenants and administrators.
 - **Security**: Timing-safe admin key verification and secure session management.
 - **PWA**: Installable web app for on-the-go management.
@@ -100,7 +100,7 @@ fief.yourdomain.com {
 Copy `.env.example` to `.env` and configure the following:
 
 - `DATABASE_URL`: Connection string for Postgres.
-- `DNS_PROVIDER`: Currently only `namecheap` is supported.
+- `DNS_PROVIDER`: Currently, only `namecheap` is supported.
 - `NAMECHEAP_*`: Your registrar credentials.
 - `ADMIN_API_KEY`: Secret key for administrative access.
 - `SESSION_SECRET`: Long random string for cookie signing.
