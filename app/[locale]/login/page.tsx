@@ -51,7 +51,7 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
         
         <div className="mt-8 text-center">
           <p className="text-slate-500 text-sm">
-            Need help? Check out the <a href={`/${locale}/docs`} className="text-blue-500 hover:text-blue-400 font-medium transition-colors">API Documentation</a>.
+            Need help? Check out the <a href={`/${locale}/api-docs`} className="text-blue-500 hover:text-blue-400 font-medium transition-colors">API Documentation</a>.
           </p>
         </div>
       </div>

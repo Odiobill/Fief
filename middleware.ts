@@ -2,7 +2,7 @@ import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { routing } from './i18n/routing';
 import { getIronSession } from 'iron-session';
-import { sessionOptions, SessionData } from './lib/auth';
+import { sessionOptions, SessionData } from './lib/session';
 
 const intlMiddleware = createIntlMiddleware(routing);
 

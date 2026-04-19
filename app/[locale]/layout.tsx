@@ -68,7 +68,7 @@ export default async function LocaleLayout({
                     </Link>
                   )}
                   <Link 
-                    href="/docs" 
+                    href="/api-docs" 
                     className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
                   >
                     {t('docs')}
@@ -105,7 +105,7 @@ export default async function LocaleLayout({
                 <span>DNS Delegation Manager</span>
               </div>
               <div className="flex items-center space-x-6">
-                <Link href="/docs" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                <Link href="/api-docs" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
                   API Documentation
                 </Link>
                 <a 

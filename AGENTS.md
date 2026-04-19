@@ -312,7 +312,7 @@ Prisma migrations must be generated and applied **inside the running container**
 
 ## Known Gotchas (inherited from Portcullis + Fief-specific)
 
-- **Next.js 16.2 Routing**: Use `proxy.ts` instead of `middleware.ts` for i18n routing and request interception.
+- **Next.js 16.2 Routing**: Use `middleware.ts` for i18n routing and request interception. (Renamed from `proxy.ts` to ensure Next.js picks it up).
 - **Prisma 7 Config**: Database connection URLs live in `prisma.config.ts`, not `schema.prisma`.
 - **Prisma 7 Runtime**: In Next.js standalone builds, use the `pg` driver adapter (`@prisma/adapter-pg`) — pass the connection string and adapter explicitly to the `PrismaClient` constructor.
 - **Next-intl Plugin**: Use `createNextIntlPlugin()` in `next.config.ts` to avoid "Couldn't find next-intl config file" errors in standalone mode.
@@ -345,7 +345,8 @@ fief/
 │   ├── [locale]/
 │   │   ├── login/
 │   │   ├── dashboard/
-│   │   └── admin/
+│   │   ├── admin/
+│   │   └── api-docs/
 │   └── layout.tsx
 ├── components/
 ├── lib/
@@ -366,8 +367,8 @@ fief/
 │   └── manifest.json
 ├── i18n/
 │   └── config.ts
-├── proxy.ts                       # next-intl + auth interception (NOT middleware.ts)
-└── docs/
+├── middleware.ts                  # next-intl + auth interception
+└── project_docs/                  # Internal project documentation
     ├── decisions/
     └── tasks/
         └── current-task.md
@@ -474,10 +475,14 @@ Fief runs under Portcullis. Before deploying for the first time:
 - **Dark Mode Enforcement**: The application is explicitly set to `dark` mode in the `<html>` tag to ensure the new premium aesthetics are consistent across all components.
 - **Prisma Generate in Docker**: `npm install` may not automatically trigger `npx prisma generate` in the Docker build environment. Explicitly running it before `npm run build` is required to ensure TypeScript finds the generated models (e.g., `Tenant`).
 - **Missing Migrations**: Ensure that at least one initial migration exists in `prisma/migrations/`. Without it, `prisma migrate deploy` in the entrypoint will not create any tables, leading to `TableDoesNotExist` errors.
+- **Middleware Naming**: Next.js requires the middleware file to be named `middleware.ts` at the root. Using `proxy.ts` as previously suggested resulted in the middleware being ignored, causing 404s on non-prefixed routes and bypassing auth checks.
+- **Root Directory Conflicts**: Avoid having a root directory named `docs` if you have a `/docs` route in the app, as some environments might prioritize the physical directory over the application route.
+- **Middleware Edge Runtime**: Next.js Middleware runs in the Edge Runtime. You MUST NOT import any Node.js native modules (like `bcrypt` or `crypto`) or heavy libraries (like `prisma`) into `middleware.ts`. Always use lightweight, edge-compatible configurations for shared logic like session options.
+- **Route Conflict**: The route `/docs` was renamed to `/api-docs` to avoid conflicts with the host reverse proxy (Portcullis), which may have global handlers for the `/docs` path.
 
 ### Last session summary
 
-Resolved a `TableDoesNotExist` error on the VPS by generating and committing the initial Prisma migration files. This ensures that the `entrypoint.sh` can successfully apply the database schema on startup using `prisma migrate deploy`.
+Resolved the persistent 404 on the documentation page by renaming the route from `/docs` to `/api-docs`. This avoids a routing conflict with the Portcullis reverse proxy, which likely intercepts the `/docs` path globally. Also synchronized all internal links to use the new path.
 
 ---
 

@@ -4,19 +4,7 @@ import crypto from 'crypto';
 import { getIronSession, IronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import prisma from './db';
-
-export interface SessionData {
-  tenantId: string | null;
-  isAdmin: boolean;
-}
-
-export const sessionOptions = {
-  password: process.env.SESSION_SECRET || 'complex_password_at_least_32_characters_long',
-  cookieName: 'fief_session',
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
-  },
-};
+import { sessionOptions, SessionData } from './session';
 
 /**
  * Verifies a tenant API key.
